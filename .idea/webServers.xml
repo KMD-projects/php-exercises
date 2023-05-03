@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f00ca1a2-a4de-4766-9d73-b1d12373da8c" name="xampp" url="http://localhost/Emrys/php-exercises">
+        <fileTransfer mountedRoot="C:\xampp\htdocs\Emrys\php-exercises" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>
