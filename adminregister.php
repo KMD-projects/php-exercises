@@ -1,4 +1,7 @@
 <?php
+
+use data\Admin;
+
 include('query.php');
 
 if (isset($_POST['btnregister'])) {

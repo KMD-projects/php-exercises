@@ -3,12 +3,12 @@ include('query.php');
 
 if (isset($_POST['btncreate'])) {
 
-    $route = $_POST['txtroute'];
+    $packageType = $_POST['txtpackagetype'];
 
-    if (insertRoute($route)) {
-        echo "Route created successfully!";
+    if (insertPackageType($packageType)) {
+        echo "Package type created successfully!";
     } else {
-        echo "Failed to create route.";
+        echo "Failed to create package type.";
     }
 }
 ?>
@@ -19,12 +19,12 @@ if (isset($_POST['btncreate'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Route</title>
+    <title>Package type</title>
 </head>
 <body>
-<form action="route.php" method="POST">
-    <label for="name">Route path: </label>
-    <input id="name" type="text" name="txtroute" placeholder="Enter route" required/><br>
+<form action="createpackagetype.php" method="POST">
+    <label for="name">Package type: </label>
+    <input id="name" type="text" name="txtpackagetype" placeholder="Enter package type" required/><br>
 
     <input type="submit" name="btncreate" value="Create">
     <input type="reset" name="btnreset" value="Cancel">

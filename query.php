@@ -1,7 +1,15 @@
 <?php
 
+use data\Admin;
+use data\Package;
+use data\PackageType;
+use data\Route;
+
 include('connect.php');
-include('Admin.php');
+require('data/Admin.php');
+require('data/Package.php');
+require('data/PackageType.php');
+require('data/Route.php');
 
 function isAdminExists($email): bool
 {
@@ -24,6 +32,54 @@ function insertRoute(string $route): bool
     global $connect;
     $insertRoute = "insert into routes (route_name) values ('$route')";
     return mysqli_query($connect, $insertRoute);
+}
+
+function insertPackageType(string $packageType): bool
+{
+    global $connect;
+    $insertPackageType = "insert into package_types (package_type_name) values ('$packageType')";
+    return mysqli_query($connect, $insertPackageType);
+}
+
+function insertPackage(Package $package): bool
+{
+    global $connect;
+    $insertPackage = "insert into packages (package_name, package_from, package_to, duration, package_price, description, package_image, route_id, package_type_id) values ('$package->name', '$package->from', '$package->to', '$package->duration', '$package->price', '$package->description', '$package->image', '$package->routeId', '$package->typeId')";
+    return mysqli_query($connect, $insertPackage);
+}
+
+function getRoutes(): array
+{
+    global $connect;
+    $routesQuery = "select * from routes";
+    $routeResult = mysqli_query($connect, $routesQuery);
+    $count = mysqli_num_rows($routeResult);
+    $routes = array();
+    for ($i = 0; $i < $count; $i++) {
+        $row = mysqli_fetch_array($routeResult);
+        $route = new Route();
+        $route->id = $row['route_id'];
+        $route->name = $row['route_name'];
+        $routes[] = $route;
+    }
+    return $routes;
+}
+
+function getPackageTypes(): array
+{
+    global $connect;
+    $packageTypeQuery = "select * from package_types";
+    $packageTypeResult = mysqli_query($connect, $packageTypeQuery);
+    $count = mysqli_num_rows($packageTypeResult);
+    $packageTypes = array();
+    for ($i = 0; $i < $count; $i++) {
+        $row = mysqli_fetch_array($packageTypeResult);
+        $packageType = new PackageType();
+        $packageType->id = $row['package_type_id'];
+        $packageType->name = $row['package_type_name'];
+        $packageTypes[] = $packageType;
+    }
+    return $packageTypes;
 }
 
 function createCustomerTable()

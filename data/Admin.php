@@ -1,5 +1,6 @@
 <?php
 
+namespace data;
 class Admin
 {
     public $id;
